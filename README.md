@@ -5,7 +5,7 @@
 ### Hola tu 👋
 
 ### Sobre mi: ###
-Soy un sistema de información, escrito en python y diseñado para automatizar procesos de consolidación de información, recorriendo la cuenta de correo electrónico autorizada para envío y recibo de notificaciones, consumir los servicios web del sistema Andess y procesar los datos a través del motor de base de datos postgreSQL.
+Soy un sistema de información, escrito en Python y diseñado para automatizar procesos de consolidación de información, recorriendo la cuenta de correo electrónico autorizada para envío y recibo de notificaciones, consumir los servicios web del sistema Andess y procesar los datos a través del motor de base de datos postgreSQL.
 
 ### Lenguajes, herramientas y tecnologías implementadas en este sistema de información: ###
 <div>
