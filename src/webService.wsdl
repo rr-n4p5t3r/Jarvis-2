@@ -1,0 +1,605 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<wsdl:definitions 
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+    xmlns:s="http://www.w3.org/2001/XMLSchema" 
+    targetNamespace="http://www.sealmail.co/" 
+    xmlns:tns="http://www.sealmail.co/" 
+    name="Servicioswebsealmail." 
+>
+
+<wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.sealmail.co/">
+        <s:element name="RegistrarMensajeRequest">
+            <s:complexType><s:sequence>
+                <s:element minOccurs="1" maxOccurs="1" name="idUsuario" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="Asunto" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="Texto" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="NombreDestinatario" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="CorreoDestinatario" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="Adjunto" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="NombreArchivo" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="Alertas" type="s:boolean" />
+                <s:element minOccurs="0" maxOccurs="1" name="Recordatorio" type="s:int" />
+                <s:element minOccurs="0" maxOccurs="1" name="CorreoCertificado" type="s:boolean" />
+                <s:element minOccurs="0" maxOccurs="1" name="FechaVencimiento" type="s:string" />
+            </s:sequence></s:complexType>
+        </s:element>
+        <s:element name="RegistrarMensajeResponse">
+            <s:complexType><s:sequence>
+                <s:element minOccurs="1" maxOccurs="1" name="hash" type="s:string" />
+            </s:sequence></s:complexType>
+        </s:element>
+        <s:complexType name="adjuntos"><s:sequence>
+                <s:element minOccurs="1" maxOccurs="1" name="Adjunto" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="NombreArchivo" type="s:string" />
+        </s:sequence></s:complexType>
+        <s:element name="RegistrarMensajesMassRequest">
+            <s:complexType><s:sequence>
+                <s:element minOccurs="1" maxOccurs="1" name="idUsuario" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="Asunto" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="Texto" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="NombreDestinatario" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="CorreoDestinatario" type="s:string" />
+                <s:element minOccurs="0" maxOccurs="unbounded" name="Adjuntos" type="tns:adjuntos" />
+                <s:element minOccurs="1" maxOccurs="1" name="Alertas" type="s:boolean" />
+                <s:element minOccurs="0" maxOccurs="1" name="Recordatorio" type="s:int" />
+                <s:element minOccurs="0" maxOccurs="1" name="CorreoCertificado" type="s:boolean" />
+                <s:element minOccurs="0" maxOccurs="1" name="FechaVencimiento" type="s:string" />
+            </s:sequence></s:complexType>
+        </s:element>
+        <s:element name="RegistrarMensajesMassResponse">
+            <s:complexType><s:sequence>
+                <s:element minOccurs="1" maxOccurs="1" name="hash" type="s:string" />
+            </s:sequence></s:complexType>
+        </s:element>
+        <s:element name="ObtenerTokenRequest">
+            <s:complexType><s:sequence>
+                <s:element minOccurs="1" maxOccurs="1" name="idUsuario" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="idMensaje" type="s:int" />
+                <s:element minOccurs="0" maxOccurs="1" name="generarPDF" type="s:boolean" />
+            </s:sequence></s:complexType>
+        </s:element>
+        <s:element name="ObtenerTokenResponse">
+            <s:complexType><s:sequence>
+                <s:element minOccurs="1" maxOccurs="1" name="hash" type="s:string" />
+            </s:sequence></s:complexType>
+        </s:element>
+        <s:element name="GuardarLogRequest">
+            <s:complexType><s:sequence>
+                <s:element minOccurs="1" maxOccurs="1" name="datetime" type="s:int" />
+                <s:element minOccurs="1" maxOccurs="1" name="idUsuario" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="messagelog" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="messageid" type="s:string" />
+            </s:sequence></s:complexType>
+        </s:element>
+        <s:element name="GuardarLogResponse">
+            <s:complexType><s:sequence>
+                <s:element minOccurs="1" maxOccurs="1" name="hash" type="s:string" />
+            </s:sequence></s:complexType>
+        </s:element>
+        <s:element name="EstadoServicioRequest">
+            <s:complexType><s:sequence>
+                <s:element minOccurs="1" maxOccurs="1" name="idUsuario" type="s:string" />
+            </s:sequence></s:complexType>
+        </s:element>
+        <s:element name="EstadoServicioResponse">
+            <s:complexType><s:sequence>
+                <s:element minOccurs="1" maxOccurs="1" name="hash" type="s:string" />
+            </s:sequence></s:complexType>
+        </s:element>
+        <s:element name="CrearIdentidadRequest">
+            <s:complexType><s:sequence>
+                <s:element minOccurs="1" maxOccurs="1" name="NombreIdentidad" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="EmailIdentidad" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="NombreGrupo" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="TipoDocAsociado" type="s:int" />
+                <s:element minOccurs="1" maxOccurs="1" name="DocumentoAsociado" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="NombreAsociado" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="ApellidoAsociado" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="idUsuario" type="s:string" />
+            </s:sequence></s:complexType>
+        </s:element>
+        <s:element name="CrearIdentidadResponse">
+            <s:complexType><s:sequence>
+                <s:element minOccurs="1" maxOccurs="1" name="hash" type="s:string" />
+            </s:sequence></s:complexType>
+        </s:element>
+        <s:element name="ObtenerAdjuntosRequest">
+            <s:complexType><s:sequence>
+                <s:element minOccurs="1" maxOccurs="1" name="idUsuario" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="idMensaje" type="s:int" />
+            </s:sequence></s:complexType>
+        </s:element>
+        <s:element name="ObtenerAdjuntosResponse">
+            <s:complexType><s:sequence>
+                <s:element minOccurs="1" maxOccurs="1" name="hash" type="s:string" />
+            </s:sequence></s:complexType>
+        </s:element>
+        <s:element name="RegistrarMensajesRequest">
+            <s:complexType><s:sequence>
+                <s:element minOccurs="1" maxOccurs="1" name="idUsuario" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="datos" type="s:string" />
+            </s:sequence></s:complexType>
+        </s:element>
+        <s:element name="RegistrarMensajesResponse">
+            <s:complexType><s:sequence>
+                <s:element minOccurs="1" maxOccurs="1" name="hash" type="s:string" />
+            </s:sequence></s:complexType>
+        </s:element>
+        <s:element name="ReporteEnviosRequest">
+            <s:complexType><s:sequence>
+                <s:element minOccurs="1" maxOccurs="1" name="idUsuario" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="FechaDesde" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="FechaHasta" type="s:string" />
+                <s:element minOccurs="0" maxOccurs="1" name="Asunto" type="s:string" />
+            </s:sequence></s:complexType>
+        </s:element>
+        <s:element name="ReporteEnviosResponse">
+            <s:complexType><s:sequence>
+                <s:element minOccurs="1" maxOccurs="1" name="hash" type="s:string" />
+            </s:sequence></s:complexType>
+        </s:element>
+        <s:element name="RegistrarUsuarioRequest">
+            <s:complexType><s:sequence>
+                <s:element minOccurs="1" maxOccurs="1" name="idUsuario" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="TipoDocumento" type="s:int" />
+                <s:element minOccurs="1" maxOccurs="1" name="NumeroDocumento" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="Nombres" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="Apellidos" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="Correo" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="TipoPersona" type="s:int" />
+                <s:element minOccurs="1" maxOccurs="1" name="TipoRegimen" type="s:int" />
+                <s:element minOccurs="1" maxOccurs="1" name="Ciudad" type="s:int" />
+                <s:element minOccurs="1" maxOccurs="1" name="Direccion" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="Telefono" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="NoFactura" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="Cupo" type="s:int" />
+            </s:sequence></s:complexType>
+        </s:element>
+        <s:element name="RegistrarUsuarioResponse">
+            <s:complexType><s:sequence>
+                <s:element minOccurs="1" maxOccurs="1" name="hash" type="s:string" />
+            </s:sequence></s:complexType>
+        </s:element>
+        <s:element name="EliminarCupoRequest">
+            <s:complexType><s:sequence>
+                <s:element minOccurs="1" maxOccurs="1" name="idUsuario" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="Correo" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="Cupo" type="s:int" />
+            </s:sequence></s:complexType>
+        </s:element>
+        <s:element name="EliminarCupoResponse">
+            <s:complexType><s:sequence>
+                <s:element minOccurs="1" maxOccurs="1" name="hash" type="s:string" />
+            </s:sequence></s:complexType>
+        </s:element>
+        <s:element name="RegistrarMensajeSMSRequest">
+            <s:complexType><s:sequence>
+                <s:element minOccurs="1" maxOccurs="1" name="idUsuario" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="Texto" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="Celular" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="Flash" type="s:boolean" />
+                <s:element minOccurs="1" maxOccurs="1" name="Certificado" type="s:boolean" />
+                <s:element minOccurs="0" maxOccurs="1" name="Adjunto" type="s:string" />
+                <s:element minOccurs="0" maxOccurs="1" name="NombreArchivo" type="s:string" />
+            </s:sequence></s:complexType>
+        </s:element>
+        <s:element name="RegistrarMensajeSMSResponse">
+            <s:complexType><s:sequence>
+                <s:element minOccurs="1" maxOccurs="1" name="hash" type="s:string" />
+            </s:sequence></s:complexType>
+        </s:element>
+        <s:element name="RegistrarMensajeSMSAdjuntoRequest">
+            <s:complexType><s:sequence>
+                <s:element minOccurs="1" maxOccurs="1" name="idUsuario" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="Texto" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="Celular" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="Flash" type="s:boolean" />
+                <s:element minOccurs="1" maxOccurs="1" name="Certificado" type="s:boolean" />
+                <s:element minOccurs="0" maxOccurs="unbounded" name="Adjuntos" type="tns:adjuntos" />
+            </s:sequence></s:complexType>
+        </s:element>
+        <s:element name="RegistrarMensajeSMSAdjuntoResponse">
+            <s:complexType><s:sequence>
+                <s:element minOccurs="1" maxOccurs="1" name="hash" type="s:string" />
+            </s:sequence></s:complexType>
+        </s:element>
+        <s:element name="ObtenerTokenSMSRequest">
+            <s:complexType><s:sequence>
+                <s:element minOccurs="1" maxOccurs="1" name="idUsuario" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="idMensaje" type="s:int" />
+                <s:element minOccurs="0" maxOccurs="1" name="generarPDF" type="s:boolean" />
+            </s:sequence></s:complexType>
+        </s:element>
+        <s:element name="ObtenerTokenSMSResponse">
+            <s:complexType><s:sequence>
+                <s:element minOccurs="1" maxOccurs="1" name="hash" type="s:string" />
+            </s:sequence></s:complexType>
+        </s:element>
+    </s:schema>
+</wsdl:types>
+
+<wsdl:message name="RegistrarMensajeRequest">
+    <wsdl:part name="parameters" element="tns:RegistrarMensajeRequest" />
+</wsdl:message>
+<wsdl:message name="RegistrarMensajeResponse">
+    <wsdl:part name="parameters" element="tns:RegistrarMensajeResponse" />
+</wsdl:message>
+
+<wsdl:message name="RegistrarMensajesMassRequest">
+    <wsdl:part name="parameters" element="tns:RegistrarMensajesMassRequest" />
+</wsdl:message>
+<wsdl:message name="RegistrarMensajesMassResponse">
+    <wsdl:part name="parameters" element="tns:RegistrarMensajesMassResponse" />
+</wsdl:message>
+
+<wsdl:message name="ObtenerTokenRequest">
+    <wsdl:part name="parameters" element="tns:ObtenerTokenRequest" />
+</wsdl:message>
+<wsdl:message name="ObtenerTokenResponse">
+    <wsdl:part name="parameters" element="tns:ObtenerTokenResponse" />
+</wsdl:message>
+
+<wsdl:message name="GuardarLogRequest">
+    <wsdl:part name="parameters" element="tns:GuardarLogRequest" />
+</wsdl:message>
+<wsdl:message name="GuardarLogResponse">
+    <wsdl:part name="parameters" element="tns:GuardarLogResponse" />
+</wsdl:message>
+
+<wsdl:message name="EstadoServicioRequest">
+    <wsdl:part name="parameters" element="tns:EstadoServicioRequest" />
+</wsdl:message>
+<wsdl:message name="EstadoServicioResponse">
+    <wsdl:part name="parameters" element="tns:EstadoServicioResponse" />
+</wsdl:message>
+
+<wsdl:message name="CrearIdentidadRequest">
+    <wsdl:part name="parameters" element="tns:CrearIdentidadRequest" />
+</wsdl:message>
+<wsdl:message name="CrearIdentidadResponse">
+    <wsdl:part name="parameters" element="tns:CrearIdentidadResponse" />
+</wsdl:message>
+
+<wsdl:message name="ObtenerAdjuntosRequest">
+    <wsdl:part name="parameters" element="tns:ObtenerAdjuntosRequest" />
+</wsdl:message>
+<wsdl:message name="ObtenerAdjuntosResponse">
+    <wsdl:part name="parameters" element="tns:ObtenerAdjuntosResponse" />
+</wsdl:message>
+
+<wsdl:message name="RegistrarMensajesRequest">
+    <wsdl:part name="parameters" element="tns:RegistrarMensajesRequest" />
+</wsdl:message>
+<wsdl:message name="RegistrarMensajesResponse">
+    <wsdl:part name="parameters" element="tns:RegistrarMensajesResponse" />
+</wsdl:message>
+
+<wsdl:message name="ReporteEnviosRequest">
+    <wsdl:part name="parameters" element="tns:ReporteEnviosRequest" />
+</wsdl:message>
+<wsdl:message name="ReporteEnviosResponse">
+    <wsdl:part name="parameters" element="tns:ReporteEnviosResponse" />
+</wsdl:message>
+
+<wsdl:message name="RegistrarUsuarioRequest">
+    <wsdl:part name="parameters" element="tns:RegistrarUsuarioRequest" />
+</wsdl:message>
+<wsdl:message name="RegistrarUsuarioResponse">
+    <wsdl:part name="parameters" element="tns:RegistrarUsuarioResponse" />
+</wsdl:message>
+
+<wsdl:message name="EliminarCupoRequest">
+    <wsdl:part name="parameters" element="tns:EliminarCupoRequest" />
+</wsdl:message>
+<wsdl:message name="EliminarCupoResponse">
+    <wsdl:part name="parameters" element="tns:EliminarCupoResponse" />
+</wsdl:message>
+
+<wsdl:message name="RegistrarMensajeSMSRequest">
+    <wsdl:part name="parameters" element="tns:RegistrarMensajeSMSRequest" />
+</wsdl:message>
+<wsdl:message name="RegistrarMensajeSMSResponse">
+    <wsdl:part name="parameters" element="tns:RegistrarMensajeSMSResponse" />
+</wsdl:message>
+
+<wsdl:message name="RegistrarMensajeSMSAdjuntoRequest">
+    <wsdl:part name="parameters" element="tns:RegistrarMensajeSMSAdjuntoRequest" />
+</wsdl:message>
+<wsdl:message name="RegistrarMensajeSMSAdjuntoResponse">
+    <wsdl:part name="parameters" element="tns:RegistrarMensajeSMSAdjuntoResponse" />
+</wsdl:message>
+
+<wsdl:message name="ObtenerTokenSMSRequest">
+    <wsdl:part name="parameters" element="tns:ObtenerTokenSMSRequest" />
+</wsdl:message>
+<wsdl:message name="ObtenerTokenSMSResponse">
+    <wsdl:part name="parameters" element="tns:ObtenerTokenSMSResponse" />
+</wsdl:message>
+
+<wsdl:portType name="RegistrarMensajePortType">
+    <wsdl:operation name="RegistrarMensaje">
+        <wsdl:input message="tns:RegistrarMensajeRequest" />
+        <wsdl:output message="tns:RegistrarMensajeResponse" />
+    </wsdl:operation>
+</wsdl:portType>
+
+<wsdl:portType name="RegistrarMensajesMassPortType">
+    <wsdl:operation name="RegistrarMensajesMass">
+        <wsdl:input message="tns:RegistrarMensajesMassRequest" />
+        <wsdl:output message="tns:RegistrarMensajesMassResponse" />
+    </wsdl:operation>
+</wsdl:portType>
+
+<wsdl:portType name="ObtenerTokenPortType">
+    <wsdl:operation name="ObtenerToken">
+        <wsdl:input message="tns:ObtenerTokenRequest" />
+        <wsdl:output message="tns:ObtenerTokenResponse" />
+    </wsdl:operation>
+</wsdl:portType>
+
+<wsdl:portType name="GuardarLogPortType">
+    <wsdl:operation name="GuardarLog">
+        <wsdl:input message="tns:GuardarLogRequest" />
+        <wsdl:output message="tns:GuardarLogResponse" />
+    </wsdl:operation>
+</wsdl:portType>
+
+<wsdl:portType name="EstadoServicioPortType">
+    <wsdl:operation name="EstadoServicio">
+        <wsdl:input message="tns:EstadoServicioRequest" />
+        <wsdl:output message="tns:EstadoServicioResponse" />
+    </wsdl:operation>
+</wsdl:portType>
+
+<wsdl:portType name="CrearIdentidadPortType">
+    <wsdl:operation name="CrearIdentidad">
+        <wsdl:input message="tns:CrearIdentidadRequest" />
+        <wsdl:output message="tns:CrearIdentidadResponse" />
+    </wsdl:operation>
+</wsdl:portType>
+
+<wsdl:portType name="ObtenerAdjuntosPortType">
+    <wsdl:operation name="ObtenerAdjuntos">
+        <wsdl:input message="tns:ObtenerAdjuntosRequest" />
+        <wsdl:output message="tns:ObtenerAdjuntosResponse" />
+    </wsdl:operation>
+</wsdl:portType>
+
+<wsdl:portType name="RegistrarMensajesPortType">
+    <wsdl:operation name="RegistrarMensajes">
+        <wsdl:input message="tns:RegistrarMensajesRequest" />
+        <wsdl:output message="tns:RegistrarMensajesResponse" />
+    </wsdl:operation>
+</wsdl:portType>
+
+<wsdl:portType name="ReporteEnviosPortType">
+    <wsdl:operation name="ReporteEnvios">
+        <wsdl:input message="tns:ReporteEnviosRequest" />
+        <wsdl:output message="tns:ReporteEnviosResponse" />
+    </wsdl:operation>
+</wsdl:portType>
+
+<wsdl:portType name="RegistrarUsuarioPortType">
+    <wsdl:operation name="RegistrarUsuario">
+        <wsdl:input message="tns:RegistrarUsuarioRequest" />
+        <wsdl:output message="tns:RegistrarUsuarioResponse" />
+    </wsdl:operation>
+</wsdl:portType>
+
+<wsdl:portType name="EliminarCupoPortType">
+    <wsdl:operation name="EliminarCupo">
+        <wsdl:input message="tns:EliminarCupoRequest" />
+        <wsdl:output message="tns:EliminarCupoResponse" />
+    </wsdl:operation>
+</wsdl:portType>
+
+<wsdl:portType name="RegistrarMensajeSMSPortType">
+    <wsdl:operation name="RegistrarMensajeSMS">
+        <wsdl:input message="tns:RegistrarMensajeSMSRequest" />
+        <wsdl:output message="tns:RegistrarMensajeSMSResponse" />
+    </wsdl:operation>
+</wsdl:portType>
+
+<wsdl:portType name="RegistrarMensajeSMSAdjuntoPortType">
+    <wsdl:operation name="RegistrarMensajeSMSAdjunto">
+        <wsdl:input message="tns:RegistrarMensajeSMSAdjuntoRequest" />
+        <wsdl:output message="tns:RegistrarMensajeSMSAdjuntoResponse" />
+    </wsdl:operation>
+</wsdl:portType>
+
+<wsdl:portType name="ObtenerTokenSMSPortType">
+    <wsdl:operation name="ObtenerTokenSMS">
+        <wsdl:input message="tns:ObtenerTokenSMSRequest" />
+        <wsdl:output message="tns:ObtenerTokenSMSResponse" />
+    </wsdl:operation>
+</wsdl:portType>
+
+<wsdl:binding name="RegistrarMensajeBinding" type="tns:RegistrarMensajePortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RegistrarMensaje">
+        <soap:operation soapAction="https://test.correocertificado4-72.com.co/webService.php#RegistrarMensaje" style="document" />
+        <wsdl:input><soap:body use="literal" /></wsdl:input>
+        <wsdl:output><soap:body use="literal" /></wsdl:output>
+        <wsdl:documentation>Ingresa un mensaje para envio.</wsdl:documentation>
+    </wsdl:operation>
+</wsdl:binding>
+
+<wsdl:binding name="RegistrarMensajesMassBinding" type="tns:RegistrarMensajesMassPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RegistrarMensajesMass">
+        <soap:operation soapAction="https://test.correocertificado4-72.com.co/webService.php#RegistrarMensajesMass" style="document" />
+        <wsdl:input><soap:body use="literal" /></wsdl:input>
+        <wsdl:output><soap:body use="literal" /></wsdl:output>
+        <wsdl:documentation>Ingresa un mensaje para envio.</wsdl:documentation>
+    </wsdl:operation>
+</wsdl:binding>
+
+<wsdl:binding name="ObtenerTokenBinding" type="tns:ObtenerTokenPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ObtenerToken">
+        <soap:operation soapAction="https://test.correocertificado4-72.com.co/webService.php#ObtenerToken" style="document" />
+        <wsdl:input><soap:body use="literal" /></wsdl:input>
+        <wsdl:output><soap:body use="literal" /></wsdl:output>
+        <wsdl:documentation>Retorna el token asociado a un mensaje.</wsdl:documentation>
+    </wsdl:operation>
+</wsdl:binding>
+
+<wsdl:binding name="GuardarLogBinding" type="tns:GuardarLogPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GuardarLog">
+        <soap:operation soapAction="https://test.correocertificado4-72.com.co/webService.php#GuardarLog" style="document" />
+        <wsdl:input><soap:body use="literal" /></wsdl:input>
+        <wsdl:output><soap:body use="literal" /></wsdl:output>
+        <wsdl:documentation>Guardar log del smtp.</wsdl:documentation>
+    </wsdl:operation>
+</wsdl:binding>
+
+<wsdl:binding name="EstadoServicioBinding" type="tns:EstadoServicioPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="EstadoServicio">
+        <soap:operation soapAction="https://test.correocertificado4-72.com.co/webService.php#EstadoServicio" style="document" />
+        <wsdl:input><soap:body use="literal" /></wsdl:input>
+        <wsdl:output><soap:body use="literal" /></wsdl:output>
+        <wsdl:documentation>Retorna el estado del servicio.</wsdl:documentation>
+    </wsdl:operation>
+</wsdl:binding>
+
+<wsdl:binding name="CrearIdentidadBinding" type="tns:CrearIdentidadPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="CrearIdentidad">
+        <soap:operation soapAction="https://test.correocertificado4-72.com.co/webService.php#CrearIdentidad" style="document" />
+        <wsdl:input><soap:body use="literal" /></wsdl:input>
+        <wsdl:output><soap:body use="literal" /></wsdl:output>
+        <wsdl:documentation>Ingresa una identidad.</wsdl:documentation>
+    </wsdl:operation>
+</wsdl:binding>
+
+<wsdl:binding name="ObtenerAdjuntosBinding" type="tns:ObtenerAdjuntosPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ObtenerAdjuntos">
+        <soap:operation soapAction="https://test.correocertificado4-72.com.co/webService.php#ObtenerAdjuntos" style="document" />
+        <wsdl:input><soap:body use="literal" /></wsdl:input>
+        <wsdl:output><soap:body use="literal" /></wsdl:output>
+        <wsdl:documentation>Retorna los adjuntos asociados a un mensaje.</wsdl:documentation>
+    </wsdl:operation>
+</wsdl:binding>
+
+<wsdl:binding name="RegistrarMensajesBinding" type="tns:RegistrarMensajesPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RegistrarMensajes">
+        <soap:operation soapAction="https://test.correocertificado4-72.com.co/webService.php#RegistrarMensajes" style="document" />
+        <wsdl:input><soap:body use="literal" /></wsdl:input>
+        <wsdl:output><soap:body use="literal" /></wsdl:output>
+        <wsdl:documentation>Ingresa los mensajes para envio.</wsdl:documentation>
+    </wsdl:operation>
+</wsdl:binding>
+
+<wsdl:binding name="ReporteEnviosBinding" type="tns:ReporteEnviosPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ReporteEnvios">
+        <soap:operation soapAction="https://test.correocertificado4-72.com.co/webService.php#ReporteEnvios" style="document" />
+        <wsdl:input><soap:body use="literal" /></wsdl:input>
+        <wsdl:output><soap:body use="literal" /></wsdl:output>
+        <wsdl:documentation>Retorna el reporte de envios.</wsdl:documentation>
+    </wsdl:operation>
+</wsdl:binding>
+
+<wsdl:binding name="RegistrarUsuarioBinding" type="tns:RegistrarUsuarioPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RegistrarUsuario">
+        <soap:operation soapAction="https://test.correocertificado4-72.com.co/webService.php#RegistrarUsuario" style="document" />
+        <wsdl:input><soap:body use="literal" /></wsdl:input>
+        <wsdl:output><soap:body use="literal" /></wsdl:output>
+        <wsdl:documentation>Ingresa usuario .</wsdl:documentation>
+    </wsdl:operation>
+</wsdl:binding>
+
+<wsdl:binding name="EliminarCupoBinding" type="tns:EliminarCupoPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="EliminarCupo">
+        <soap:operation soapAction="https://test.correocertificado4-72.com.co/webService.php#EliminarCupo" style="document" />
+        <wsdl:input><soap:body use="literal" /></wsdl:input>
+        <wsdl:output><soap:body use="literal" /></wsdl:output>
+        <wsdl:documentation>Ingresa usuario .</wsdl:documentation>
+    </wsdl:operation>
+</wsdl:binding>
+
+<wsdl:binding name="RegistrarMensajeSMSBinding" type="tns:RegistrarMensajeSMSPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RegistrarMensajeSMS">
+        <soap:operation soapAction="https://test.correocertificado4-72.com.co/webService.php#RegistrarMensajeSMS" style="document" />
+        <wsdl:input><soap:body use="literal" /></wsdl:input>
+        <wsdl:output><soap:body use="literal" /></wsdl:output>
+        <wsdl:documentation>Ingresa un mensaje de texto para envio.</wsdl:documentation>
+    </wsdl:operation>
+</wsdl:binding>
+
+<wsdl:binding name="RegistrarMensajeSMSAdjuntoBinding" type="tns:RegistrarMensajeSMSAdjuntoPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="RegistrarMensajeSMSAdjunto">
+        <soap:operation soapAction="https://test.correocertificado4-72.com.co/webService.php#RegistrarMensajeSMSAdjunto" style="document" />
+        <wsdl:input><soap:body use="literal" /></wsdl:input>
+        <wsdl:output><soap:body use="literal" /></wsdl:output>
+        <wsdl:documentation>Ingresa un mensaje de texto para envio.</wsdl:documentation>
+    </wsdl:operation>
+</wsdl:binding>
+
+<wsdl:binding name="ObtenerTokenSMSBinding" type="tns:ObtenerTokenSMSPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ObtenerTokenSMS">
+        <soap:operation soapAction="https://test.correocertificado4-72.com.co/webService.php#ObtenerTokenSMS" style="document" />
+        <wsdl:input><soap:body use="literal" /></wsdl:input>
+        <wsdl:output><soap:body use="literal" /></wsdl:output>
+        <wsdl:documentation>Retorna el token asociado a un mensaje.</wsdl:documentation>
+    </wsdl:operation>
+</wsdl:binding>
+
+<wsdl:service name="Servicioswebsealmail.">
+    <wsdl:port name="RegistrarMensajePort" binding="tns:RegistrarMensajeBinding">
+        <soap:address location="https://test.correocertificado4-72.com.co/webService.php" />
+    </wsdl:port>
+    <wsdl:port name="RegistrarMensajesMassPort" binding="tns:RegistrarMensajesMassBinding">
+        <soap:address location="https://test.correocertificado4-72.com.co/webService.php" />
+    </wsdl:port>
+    <wsdl:port name="ObtenerTokenPort" binding="tns:ObtenerTokenBinding">
+        <soap:address location="https://test.correocertificado4-72.com.co/webService.php" />
+    </wsdl:port>
+    <wsdl:port name="GuardarLogPort" binding="tns:GuardarLogBinding">
+        <soap:address location="https://test.correocertificado4-72.com.co/webService.php" />
+    </wsdl:port>
+    <wsdl:port name="EstadoServicioPort" binding="tns:EstadoServicioBinding">
+        <soap:address location="https://test.correocertificado4-72.com.co/webService.php" />
+    </wsdl:port>
+    <wsdl:port name="CrearIdentidadPort" binding="tns:CrearIdentidadBinding">
+        <soap:address location="https://test.correocertificado4-72.com.co/webService.php" />
+    </wsdl:port>
+    <wsdl:port name="ObtenerAdjuntosPort" binding="tns:ObtenerAdjuntosBinding">
+        <soap:address location="https://test.correocertificado4-72.com.co/webService.php" />
+    </wsdl:port>
+    <wsdl:port name="RegistrarMensajesPort" binding="tns:RegistrarMensajesBinding">
+        <soap:address location="https://test.correocertificado4-72.com.co/webService.php" />
+    </wsdl:port>
+    <wsdl:port name="ReporteEnviosPort" binding="tns:ReporteEnviosBinding">
+        <soap:address location="https://test.correocertificado4-72.com.co/webService.php" />
+    </wsdl:port>
+    <wsdl:port name="RegistrarUsuarioPort" binding="tns:RegistrarUsuarioBinding">
+        <soap:address location="https://test.correocertificado4-72.com.co/webService.php" />
+    </wsdl:port>
+    <wsdl:port name="EliminarCupoPort" binding="tns:EliminarCupoBinding">
+        <soap:address location="https://test.correocertificado4-72.com.co/webService.php" />
+    </wsdl:port>
+    <wsdl:port name="RegistrarMensajeSMSPort" binding="tns:RegistrarMensajeSMSBinding">
+        <soap:address location="https://test.correocertificado4-72.com.co/webService.php" />
+    </wsdl:port>
+    <wsdl:port name="RegistrarMensajeSMSAdjuntoPort" binding="tns:RegistrarMensajeSMSAdjuntoBinding">
+        <soap:address location="https://test.correocertificado4-72.com.co/webService.php" />
+    </wsdl:port>
+    <wsdl:port name="ObtenerTokenSMSPort" binding="tns:ObtenerTokenSMSBinding">
+        <soap:address location="https://test.correocertificado4-72.com.co/webService.php" />
+    </wsdl:port>
+</wsdl:service>
+
+</wsdl:definitions>
