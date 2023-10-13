@@ -56,8 +56,7 @@ helpers = Helpers()
 zip_filename = "_adjuntos_sealmail_.zip" 
 
 # Seleccionar la carpeta de la bandeja de entrada
-#mail.select('inbox')
-mail.select('inbox.prueba2')
+mail.select('inbox')
 
 # Verificar si la carpeta "procesados" existe
 if 'procesados' not in mail.list()[1]:
